@@ -21,8 +21,6 @@ export const AnimatedLoadImage = props => {
 
   const finishedLoading = !isImageLoadSuccess && !isImageLoadFailed;
 
-  console.log('AnimatedLoadImage props', JSON.stringify(props));
-
   return (
     <View style={[props.style]}>
       {finishedLoading && <Shimmer {...otherProps}/>}

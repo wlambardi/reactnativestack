@@ -23,10 +23,6 @@ export const BottomTabs = (props) => {
 
   let icon = 'feather';
 
-  if (props.route.state){
-    console.log('props.route.state.routes[props.route.state.index].name', props.route.state.routes[props.route.state.index].name);
-  }
-
   switch (routeName) {
     case 'Home':
       icon = '';

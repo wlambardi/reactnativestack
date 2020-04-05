@@ -90,7 +90,9 @@ export function DrawerContent(props) {
               />
             )}
             label="Profile"
-            onPress={() => {}}
+            onPress={() =>
+              props.navigation.push("Details", { name: "React Native by Example " })
+            }
           />
           <DrawerItem
             icon={({ color, size }) => (

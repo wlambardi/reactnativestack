@@ -10,7 +10,6 @@ export const Shimmer = props => {
   const { style } = props;
   const [isAnimationDone, setAnimationStatus] = useState(false);
   const shimmer = useRef(new Animated.Value(0)).current;
-  console.log('Shimmer props', JSON.stringify(props));
   const animateShimmer = useCallback(() => {
     Animated.timing(shimmer, {
       toValue: 1,
