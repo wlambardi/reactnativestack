@@ -19,7 +19,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
-import { AuthContext } from "./context";
+import { AuthContext } from "./context/authContext";
 import { PreferencesContext } from './context/preferencesContext';
 
 

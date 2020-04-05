@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { View, Image, Animated, ViewPropTypes } from 'react-native';
-//import images from '../../theme/images';
 import { getScaledRoundedValue } from '../../util/metrics';
 import Shimmer from '../shimmer';
 import styles from './style';
@@ -22,9 +21,10 @@ export const AnimatedLoadImage = props => {
 
   const finishedLoading = !isImageLoadSuccess && !isImageLoadFailed;
 
-  console.log('otherProps',otherProps)
+  console.log('AnimatedLoadImage props', JSON.stringify(props));
+
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[props.style]}>
       {finishedLoading && <Shimmer {...otherProps}/>}
 
       <Animated.View style={{ opacity }}>

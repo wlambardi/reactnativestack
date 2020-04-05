@@ -3,26 +3,14 @@ import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Appbar, useTheme, Title, Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as Font from 'expo-font';
 import { BottomTabs } from './bottomTabs';
-import { Details } from './details';
+import { Details } from './screens/details';
 
-const Stack = createStackNavigator();
 
-function useFonts(fontMap) {
-  let [fontsLoaded, setFontsLoaded] = React.useState(false);
-  (async () => {
-    await Font.loadAsync(fontMap);
-    setFontsLoaded(true);
-  })();
-  return [fontsLoaded];
-}
 
 export const StackNavigator = ({ userToken }) => {
   const theme = useTheme();
-  let [fontsLoaded] = useFonts({
-    'Poppins-Regular': require('../assets/fonts/Poppins/Poppins-Regular.ttf'),
-  });
+  const Stack = createStackNavigator();
   return (
     <Stack.Navigator
       initialRouteName="BottomTabs"
@@ -61,8 +49,10 @@ export const StackNavigator = ({ userToken }) => {
                 </TouchableOpacity>
               )}
               <Appbar.Content
-                title={fontsLoaded ?  <Title style={{fontFamily: 'Poppins-Regular'}}>{title}</Title> : <Text>Loading ...</Text>}
+                title={title}
                 titleStyle={{
+                  fontSize: 22,
+                  fontWeight: '600',
                   color: theme.colors.primary,
                 }}
               />
@@ -75,7 +65,7 @@ export const StackNavigator = ({ userToken }) => {
         name="BottomTabs"
         component={BottomTabs}
         options={({ route }) => {
-          console.log('!@# options', { route });
+          //console.log('!@# options', { route });
           const routeName = route.state
             ? route.state.routes[route.state.index].name
             : 'Home';

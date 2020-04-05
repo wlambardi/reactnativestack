@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   Provider as PaperProvider,
   DefaultTheme,
@@ -15,21 +15,21 @@ I18nManager.allowRTL(true);
 
 export const Main = () => {
   const colorScheme = useColorScheme();
-  const [theme, setTheme] = React.useState(
+  const [theme, setTheme] = useState(
     colorScheme === 'dark' ? 'dark' : 'light'
   );
-  const [rtl] = React.useState(I18nManager.isRTL);
+  const [rtl] = useState(I18nManager.isRTL);
 
   function toggleTheme() {
     setTheme(theme => (theme === 'light' ? 'dark' : 'light'));
   }
 
-  const toggleRTL = React.useCallback(() => {
+  const toggleRTL = useCallback(() => {
     I18nManager.forceRTL(!rtl);
     Updates.reloadFromCache();
   }, [rtl]);
 
-  const preferences = React.useMemo(
+  const preferences = useMemo(
     () => ({
       toggleTheme,
       toggleRTL,

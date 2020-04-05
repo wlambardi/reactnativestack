@@ -2,19 +2,15 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import PropTypes from 'prop-types';
 import { Svg, Defs, LinearGradient, Stop, Rect } from 'react-native-svg';
-import colors from '../../theme/colors';
 import { screenMetrics } from '../../util/metrics';
 import { main } from './style';
-import { useTheme } from 'react-native-paper';
 
 export const Shimmer = props => {
-  
-  const theme = useTheme();
-  const { containerStyle, highlightColor } = props;
 
+  const { style } = props;
   const [isAnimationDone, setAnimationStatus] = useState(false);
   const shimmer = useRef(new Animated.Value(0)).current;
-
+  console.log('Shimmer props', JSON.stringify(props));
   const animateShimmer = useCallback(() => {
     Animated.timing(shimmer, {
       toValue: 1,
@@ -44,7 +40,7 @@ export const Shimmer = props => {
   }, [isAnimationDone, animateShimmer, shimmer]);
 
   return (
-    <View style={[main.container, containerStyle,{borderRadius:20}]}>
+    <View style={[style, main.container]}>
       <Animated.View style={{ transform: [{ translateX: translate }] }}>
         <Svg height={screenMetrics.height} width={screenMetrics.height}>
           <Defs>
@@ -75,5 +71,5 @@ Shimmer.propTypes = {
 
 Shimmer.defaultProps = {
   containerStyle: {},
-  highlightColor: colors.WHITE,
+  highlightColor: 'white',
 };

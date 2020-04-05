@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Button, ImageBackground } from "react-native";
 import { useTheme, Surface, Text } from 'react-native-paper';
 
-import { AuthContext } from "./context";
+import { AuthContext } from "../context/authContext";
 
 const styles = StyleSheet.create({
   container: {

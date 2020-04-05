@@ -5,15 +5,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { Appbar, useTheme, Title } from 'react-native-paper';
-import * as Font from 'expo-font';
 import { StackNavigator } from './stack';
 import { DrawerContent } from './drawerContent';
-import { AuthContext } from "./context";
+import { AuthContext } from "./context/authContext";
 import {
   SignIn,
   CreateAccount,
   Splash
-} from "./Screens";
+} from "./screens/Screens";
 
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
@@ -21,15 +20,6 @@ const DrawerScreen = () => (
     <Drawer.Screen name="Home" component={StackNavigator} />
   </Drawer.Navigator>
 );
-
-function useFonts(fontMap) {
-  let [fontsLoaded, setFontsLoaded] = React.useState(false);
-  (async () => {
-    await Font.loadAsync(fontMap);
-    setFontsLoaded(true);
-  })();
-  return [fontsLoaded];
-}
 
 const RootStack = createStackNavigator();
 const RootStackScreen = ({ userToken }) => (
@@ -58,10 +48,6 @@ const RootStackScreen = ({ userToken }) => (
 const AuthStack = createStackNavigator();
 const AuthStackScreen = () => {
   const theme = useTheme();
-  let [fontsLoaded] = useFonts({
-    'Poppins-Regular': require('../assets/fonts/Poppins/Poppins-Regular.ttf'),
-  });
-
   return(
     <AuthStack.Navigator
       screenOptions={{
@@ -85,10 +71,10 @@ const AuthStackScreen = () => {
                 />
               )}
               <Appbar.Content
-                title={fontsLoaded ?  <Title style={{fontFamily: 'Poppins-Regular'}}>{title}</Title> : <Title>Loading ...</Title>}
+                title={title}
                 titleStyle={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
+                  fontSize: 22,
+                  fontWeight: '600',
                   color: theme.colors.primary,
                 }}
               />
