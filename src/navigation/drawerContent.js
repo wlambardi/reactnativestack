@@ -35,6 +35,11 @@ export function DrawerContent(props) {
     outputRange: [-100, -85, -70, -45, 0],
   });
 
+  openProfile =()=>{
+    props.navigation.toggleDrawer();
+    props.navigation.push("Details", { name: "React Native by Example " });
+  }
+
   return (
     <DrawerContentScrollView {...props}>
       <Animated.View
@@ -90,9 +95,7 @@ export function DrawerContent(props) {
               />
             )}
             label="Profile"
-            onPress={() =>
-              props.navigation.push("Details", { name: "React Native by Example " })
-            }
+            onPress={() => openProfile()}
           />
           <DrawerItem
             icon={({ color, size }) => (
