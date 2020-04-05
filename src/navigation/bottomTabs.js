@@ -5,10 +5,10 @@ import { useTheme, Portal, FAB } from 'react-native-paper';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useIsFocused, RouteProp } from '@react-navigation/native';
 
-import overlay from './util/overlay';
-import { Feed } from './screens/feed';
-import { Message } from './screens/message';
-import { Notifications } from './screens/notifications';
+import overlay from '../util/overlay';
+import { Feed } from '../screens/feed';
+import { Message } from '../screens/message';
+import { Notifications } from '../screens/notifications';
 
 const Tab = createMaterialBottomTabNavigator();
 

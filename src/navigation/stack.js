@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Appbar, useTheme, Title, Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { BottomTabs } from './bottomTabs';
-import { Details } from './screens/details';
+import { Details } from '../screens/details';
 
 
 

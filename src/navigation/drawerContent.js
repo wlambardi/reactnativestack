@@ -19,8 +19,8 @@ import {
   useTheme,
 } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
-import { AuthContext } from "./context/authContext";
-import { PreferencesContext } from './context/preferencesContext';
+import { AuthContext } from "../context/authContext";
+import { PreferencesContext } from '../context/preferencesContext';
 
 
 export function DrawerContent(props) {

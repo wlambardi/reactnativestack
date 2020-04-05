@@ -9,7 +9,7 @@ import { Updates } from 'expo';
 import { useColorScheme } from 'react-native-appearance';
 
 import { RootNavigator } from './rootNavigator';
-import { PreferencesContext } from './context/preferencesContext';
+import { PreferencesContext } from '../context/preferencesContext';
 
 I18nManager.allowRTL(true);
 

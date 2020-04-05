@@ -7,12 +7,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Appbar, useTheme, Title } from 'react-native-paper';
 import { StackNavigator } from './stack';
 import { DrawerContent } from './drawerContent';
-import { AuthContext } from "./context/authContext";
+import { AuthContext } from "../context/authContext";
 import {
   SignIn,
   CreateAccount,
   Splash
-} from "./screens/Screens";
+} from "../screens/Screens";
 
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
