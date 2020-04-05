@@ -1,6 +1,6 @@
-import React from "react";
-import { View, StyleSheet, Button, ImageBackground } from "react-native";
-import { useTheme, Surface, Text } from 'react-native-paper';
+import React, { useContext } from "react";
+import { StyleSheet } from "react-native";
+import { Surface, useTheme, Button, Headline, Text } from 'react-native-paper';
 
 import { AuthContext } from "../context/authContext";
 import Loader from "../util/loader";
@@ -20,40 +20,38 @@ const styles = StyleSheet.create({
 });
 
 const ScreenContainer = ({ children }) => (
-  <View style={styles.container}>{children}</View>
+  <Surface style={styles.container}>{children}</Surface>
 );
 
-export const Splash = () => {
-  const theme = useTheme();
-  return (
-      <Surface style={styles.container}>
-        <Loader/>
-      </Surface>
-  );
-};
+export const Splash = () => <ScreenContainer><Loader/></ScreenContainer>
 
 export const SignIn = ({ navigation }) => {
-  const { signIn } = React.useContext(AuthContext);
-
+  const { signIn } = useContext(AuthContext);
+  const theme = useTheme();
   return (
     <ScreenContainer>
-      <Text>Sign In Screen</Text>
-      <Button title="Sign In" onPress={() => signIn()} />
-      <Button
-        title="Create Account"
-        onPress={() => navigation.push("CreateAccount")}
-      />
+      <Headline>Welcome</Headline>
+
+      <Button icon="account-key" color={theme.colors.primary} mode="outlined" onPress={() => signIn()}>
+        Sign In
+      </Button>
+
+      <Button icon="account-plus" color={theme.colors.primary} mode="outlined" onPress={() => navigation.push("CreateAccount")}>
+        Create Account
+      </Button>
     </ScreenContainer>
   );
 };
 
 export const CreateAccount = () => {
-  const { signUp } = React.useContext(AuthContext);
-
+  const { signUp } = useContext(AuthContext);
+  const theme = useTheme();
   return (
     <ScreenContainer>
       <Text>Create Account Screen</Text>
-      <Button title="Sign Up" onPress={() => signUp()} />
+      <Button icon="account-plus" color={theme.colors.primary} mode="outlined" onPress={() => signUp()}>
+        Sign Up
+      </Button>
     </ScreenContainer>
   );
 };

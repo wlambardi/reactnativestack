@@ -5,7 +5,7 @@ import {
   DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import {
   Avatar,
@@ -25,10 +25,10 @@ import { PreferencesContext } from '../context/preferencesContext';
 
 export function DrawerContent(props) {
   const paperTheme = useTheme();
-  const { rtl, theme, toggleRTL, toggleTheme } = React.useContext(
+  const { rtl, theme, toggleRTL, toggleTheme } = useContext(
     PreferencesContext
   );
-  const { signOut } = React.useContext(AuthContext);
+  const { signOut } = useContext(AuthContext);
 
   const translateX = Animated.interpolate(props.progress, {
     inputRange: [0, 0.5, 0.7, 0.8, 1],
@@ -107,7 +107,7 @@ export function DrawerContent(props) {
           <DrawerItem
             icon={({ color, size }) => (
               <MaterialCommunityIcons
-                name="account"
+                name="logout-variant"
                 color={color}
                 size={size}
               />

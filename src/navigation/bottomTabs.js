@@ -3,7 +3,6 @@ import color from 'color';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { useTheme, Portal, FAB } from 'react-native-paper';
 import { useSafeArea } from 'react-native-safe-area-context';
-import { useIsFocused, RouteProp } from '@react-navigation/native';
 
 import overlay from '../util/overlay';
 import { Feed } from '../screens/feed';
@@ -19,9 +18,8 @@ export const BottomTabs = (props) => {
 
   const theme = useTheme();
   const safeArea = useSafeArea();
-  const isFocused = useIsFocused();
 
-  let icon = 'feather';
+  let icon = '';
 
   switch (routeName) {
     case 'Home':
@@ -77,27 +75,25 @@ export const BottomTabs = (props) => {
           }}
         />
       </Tab.Navigator>
-      {
-        icon !== '' && 
-        <Portal>
-          <FAB
-            visible={isFocused}
-            icon={icon}
-            style={{
-              position: 'absolute',
-              bottom: safeArea.bottom + 65,
-              right: 16,
-            }}
-            color="white"
-            theme={{
-              colors: {
-                accent: theme.colors.primary,
-              },
-            }}
-            onPress={() => {}}
-          />
-        </Portal>
-      }
+
+      <Portal>
+        <FAB
+          visible={icon!=='' ? true : false}
+          icon={icon}
+          style={{
+            position: 'absolute',
+            bottom: safeArea.bottom + 75,
+            right: 16,
+          }}
+          color="white"
+          theme={{
+            colors: {
+              accent: theme.colors.primary,
+            },
+          }}
+          onPress={() => {}}
+        />
+      </Portal>
       
     </React.Fragment>
   );
