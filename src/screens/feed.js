@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView, FlatList } from 'react-native';
-import { useTheme, Surface, Headline, Button, Paragraph, Card, Title, Caption } from 'react-native-paper';
+import { useTheme, Surface, Headline, List } from 'react-native-paper';
 import { AuthContext } from "../context/authContext";
 import color from 'color';
 import { AnimatedLoadImage } from '../components/animated-load-image/AnimatedLoadImage';
@@ -30,9 +30,11 @@ export const Feed = (props) => {
         data={dataSource.albums}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => 
-        <>
-        <Caption>{item.title}</Caption>
-        </>
+          <List.Item
+            title={item.title}
+            left={props => <List.Icon {...props} icon="folder" />}
+            right={props => <List.Icon {...props} icon="menu-right" />}
+          />
         }
         keyExtractor={(item) => item.id.toString()}
       />
@@ -44,6 +46,7 @@ export const Feed = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding:20,
   },
   divider: {
     marginVertical:20,
