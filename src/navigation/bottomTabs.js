@@ -22,14 +22,11 @@ export const BottomTabs = (props) => {
   let icon = '';
 
   switch (routeName) {
-    case 'Home':
-      icon = '';
-      break;
     case 'Messages':
       icon = 'email-plus-outline';
       break;
     default:
-      icon = 'feather';
+      icon = '';
       break;
   }
 
@@ -91,7 +88,7 @@ export const BottomTabs = (props) => {
               accent: theme.colors.primary,
             },
           }}
-          onPress={() => {}}
+          onPress={() => {props.navigation.push("Details", { name: "Fab button" });}}
         />
       </Portal>
       

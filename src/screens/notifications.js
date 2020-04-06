@@ -1,47 +1,60 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useTheme, Surface, Headline } from 'react-native-paper';
-import { AnimatedLoadImage } from '../components/animated-load-image/AnimatedLoadImage';
 import color from 'color';
+import { Dimensions } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
-export const Notifications = (props) => {
+import overlay from '../util/overlay';
+import { Feed } from '../screens/feed';
+import { Message } from '../screens/message';
+
+const initialLayout = { width: Dimensions.get('window').width };
+
+const All = () => <Feed />;
+
+const Mentions = () => <Message />;
+
+export const Notifications = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'all', title: 'All' },
+    { key: 'mentions', title: 'Mentions' },
+  ]);
+
   const theme = useTheme();
-  const imageBorderColor = color(theme.colors.text)
-    .alpha(0.15)
-    .rgb()
-    .string();
+
+  const renderScene = SceneMap({
+    all: All,
+    mentions: Mentions,
+  });
+
+  const tabBarColor = theme.dark
+    ? (overlay(4, theme.colors.surface))
+    : theme.colors.surface;
+
+  const rippleColor = theme.dark
+    ? color(tabBarColor).lighten(0.5)
+    : color(tabBarColor).darken(0.2);
+
+  const renderTabBar = props => (
+    <TabBar
+      {...props}
+      indicatorStyle={{ backgroundColor: theme.colors.primary }}
+      style={{ backgroundColor: tabBarColor, shadowColor: theme.colors.text }}
+      labelStyle={{ color: theme.colors.primary }}
+      pressColor={rippleColor}
+    />
+  );
 
   return (
-    <Surface style={styles.container}>
-      <Headline style={{color:theme.colors.text}}>Notifications</Headline>
-
-      <View style={styles.stdMarginVertical}>
-        <AnimatedLoadImage
-          source={{ uri: 'https://ak2.picdn.net/shutterstock/videos/11575052/thumb/1.jpg' }}
-          style={[
-            styles.image,
-            {
-              borderColor: imageBorderColor,
-            },
-          ]}
-        />
-      </View>
-    </Surface>
+    <React.Fragment>
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={initialLayout}
+        renderTabBar={renderTabBar}
+      />
+    </React.Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding:20,
-  },
-  image: {
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 20,
-    width: '100%',
-    height: 150,
-  },
-  stdMarginVertical: {
-    marginVertical: 20,
-  }
-});

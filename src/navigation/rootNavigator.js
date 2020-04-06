@@ -106,19 +106,15 @@ export const RootNavigator = () => {
   const authContext = React.useMemo(() => {
     return {
       signIn: () => {
-        setIsLoading(true);
-        setTimeout(function(){
-          setIsLoading(false);
-          setUserToken("asdf");
-        }, 500);
-        
+        setIsLoading(false);
+        setUserToken("asdf");
       },
       signUp: () => {
         setIsLoading(false);
         setUserToken("asdf");
       },
       signOut: () => {
-        setIsLoading(true);
+        setIsLoading(false);
         setTimeout(function(){
           setIsLoading(false);
           setUserToken(null);

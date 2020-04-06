@@ -14,11 +14,11 @@ export const Message = (props) => {
   return (
     <Surface style={styles.container}>
       
-      <Headline style={{color:theme.colors.text}}>Messages</Headline>
+      <Headline style={{color:theme.colors.text}}>New messages</Headline>
 
       <View style={styles.stdMarginVertical}>
         <AnimatedLoadImage
-          source={{ uri: 'https://static.turbosquid.com/Preview/2019/02/25__04_16_17/F0000.jpg2FC6BC63-7CDA-4F27-95B9-EAEFCA0E92F6Zoom.jpg' }}
+          source={{ uri: 'https://source.unsplash.com/daily' }}
           style={[
             styles.image,
             {

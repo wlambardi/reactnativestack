@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView, FlatList } from 'react-native';
 import { useTheme, Surface, Headline, List } from 'react-native-paper';
-import { AuthContext } from "../context/authContext";
 import color from 'color';
-import { AnimatedLoadImage } from '../components/animated-load-image/AnimatedLoadImage';
-
 import {useSelector, useDispatch} from 'react-redux';
 import {retrieveAlbums} from '../store/actions/albums';
+import Loader from "../util/loader";
 
 export const Feed = (props) => {
   const theme = useTheme();
@@ -21,32 +19,34 @@ export const Feed = (props) => {
   useEffect(() => {
     dispatch(retrieveAlbums());
   }, [dispatch]);
-  return (
-    <Surface style={styles.container}>
-      
-      <Headline style={{color:theme.colors.text}}>Feed</Headline>
-      
-      <FlatList
-        data={dataSource.albums}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => 
-          <List.Item
-            title={item.title}
-            left={props => <List.Icon {...props} icon="folder" />}
-            right={props => <List.Icon {...props} icon="menu-right" />}
-          />
-        }
-        keyExtractor={(item) => item.id.toString()}
-      />
 
-    </Surface>
-  );
+  if (dataSource.loadingAlbums) {
+    return <Loader />;
+  } else {
+    if (dataSource.albums !== null) {
+      return (
+        <Surface style={styles.container}>
+          <FlatList
+            data={dataSource.albums}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => 
+              <List.Item
+                title={item.title}
+                left={props => <List.Icon {...props} icon="folder" />}
+              />
+            }
+          />
+        </Surface>
+      );
+    }
+  }
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding:20,
+    padding:5,
   },
   divider: {
     marginVertical:20,
