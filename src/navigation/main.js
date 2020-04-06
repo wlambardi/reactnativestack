@@ -7,13 +7,15 @@ import {
 import { I18nManager, Text } from 'react-native';
 import { Updates } from 'expo';
 import { useColorScheme } from 'react-native-appearance';
-
 import { RootNavigator } from './rootNavigator';
 import { PreferencesContext } from '../context/preferencesContext';
+import { Provider } from 'react-redux';
+import configureStore from '../store/configureStore';
 
 I18nManager.allowRTL(true);
 
 export const Main = () => {
+  const store = configureStore();
   const colorScheme = useColorScheme();
   const [theme, setTheme] = useState(
     colorScheme === 'dark' ? 'dark' : 'light'
@@ -40,22 +42,24 @@ export const Main = () => {
   );
 
   return (
-    <PreferencesContext.Provider value={preferences}>
-      <PaperProvider
-        theme={
-          theme === 'light'
-            ? {
-                ...DefaultTheme,
-                colors: { ...DefaultTheme.colors, primary: '#1ba1f2' },
-              }
-            : {
-                ...DarkTheme,
-                colors: { ...DarkTheme.colors, primary: '#1ba1f2' },
-              }
-        }
-      >
-        <RootNavigator />
-      </PaperProvider>
-    </PreferencesContext.Provider>
+    <Provider store={store}>
+      <PreferencesContext.Provider value={preferences}>
+        <PaperProvider
+          theme={
+            theme === 'light'
+              ? {
+                  ...DefaultTheme,
+                  colors: { ...DefaultTheme.colors, primary: '#1ba1f2' },
+                }
+              : {
+                  ...DarkTheme,
+                  colors: { ...DarkTheme.colors, primary: '#1ba1f2' },
+                }
+          }
+        >
+          <RootNavigator />
+        </PaperProvider>
+      </PreferencesContext.Provider>
+    </Provider>
   );
 };
