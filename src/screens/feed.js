@@ -29,20 +29,8 @@ export const Feed = (props) => {
       <FlatList
         data={dataSource.albums}
         showsHorizontalScrollIndicator={false}
-        horizontal={true}
         renderItem={({ item }) => 
         <>
-        <Surface style={styles.surface}>
-        <AnimatedLoadImage
-          source={{ uri: 'https://picsum.photos/300' }}
-          style={[
-            styles.image,
-            {
-              borderColor: imageBorderColor,
-            },
-          ]}
-        />
-        </Surface>
         <Caption>{item.title}</Caption>
         </>
         }
