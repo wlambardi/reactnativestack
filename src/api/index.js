@@ -6,6 +6,21 @@ const apiInstance = axios.create({
   baseURL: BASE_URL,
 });
 
+
+export const getNews = () =>
+  apiInstance
+    .request({
+      url: 'https://newsapi.org/v2/top-headlines?country=ar&apiKey=d0cdeea4281146deb024ff3097f884c8',
+      method: 'GET',
+      params: { pageSize: 32 },
+    })
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => {
+      return Promise.reject(error.message);
+    });
+
 export const getPosts = () =>
   apiInstance
     .request({

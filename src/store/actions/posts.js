@@ -14,9 +14,9 @@ const postsActionCreators = {
   failure: createAction(postsActionTypes.RETRIEVE_POSTS_FAILURE),
 };
 
-export const retrievePosts = () => dispatch => {
+export const retrievePosts = qry => dispatch => {
   dispatch(postsActionCreators.request());
-  getPosts()
+  getPosts(qry)
     .then(posts => {
       dispatch(postsActionCreators.success(posts));
     })
