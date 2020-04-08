@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import color from 'color';
 import { Dimensions } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -6,26 +6,24 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import overlay from '../util/overlay';
 import { Feed } from '../screens/feed';
-import { Message } from '../screens/message';
+import { Album } from '../screens/album';
 
 const initialLayout = { width: Dimensions.get('window').width };
-
 const All = () => <Feed />;
-
-const Mentions = () => <Message />;
+const PhotoAlbum = () => <Album />;
 
 export const Notifications = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'all', title: 'All' },
-    { key: 'mentions', title: 'Mentions' },
+    { key: 'album', title: 'Album' },
   ]);
 
   const theme = useTheme();
 
   const renderScene = SceneMap({
     all: All,
-    mentions: Mentions,
+    album: PhotoAlbum,
   });
 
   const tabBarColor = theme.dark
@@ -45,7 +43,7 @@ export const Notifications = () => {
       pressColor={rippleColor}
     />
   );
-
+  
   return (
     <React.Fragment>
       <TabView

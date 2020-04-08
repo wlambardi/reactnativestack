@@ -18,7 +18,7 @@ export const Message = (props) => {
 
       <View style={styles.stdMarginVertical}>
         <AnimatedLoadImage
-          source={{ uri: 'https://source.unsplash.com/daily' }}
+          source={{ uri: 'https://source.unsplash.com/1600x900/?nature,water' }}
           style={[
             styles.image,
             {
