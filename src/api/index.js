@@ -10,9 +10,9 @@ const apiInstance = axios.create({
 export const getNews = () =>
   apiInstance
     .request({
-      url: 'https://newsapi.org/v2/top-headlines?country=ar&apiKey=d0cdeea4281146deb024ff3097f884c8',
+      url: 'https://newsapi.org/v2/top-headlines?apiKey=d0cdeea4281146deb024ff3097f884c8',
       method: 'GET',
-      params: { pageSize: 18 },
+      params: { pageSize: 100, country: 'us' },
     })
     .then(response => {
       return response.data;

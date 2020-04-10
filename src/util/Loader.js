@@ -10,8 +10,8 @@ const Loader = () =>
         loop={true}
         autoPlay={true}
         style={{
-          width: w(40),
-          height: h(40),
+          width: w(50),
+          height: w(50),
           backgroundColor: 'transparent',
         }}
         source={ require('../../assets/lotties/loader.json') }

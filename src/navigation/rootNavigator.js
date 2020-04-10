@@ -60,7 +60,7 @@ const AuthStackScreen = () => {
               ? options.title
               : scene.route.name;
 
-          return (
+          /*return (
             <Appbar.Header
               theme={{ colors: { primary: theme.colors.surface } }}
             >
@@ -79,7 +79,7 @@ const AuthStackScreen = () => {
                 }}
               />
             </Appbar.Header>
-          );
+          );*/
         },
       }}
     >

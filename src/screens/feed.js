@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, RefreshControl, FlatList, View } from 'react-native';
-import { useTheme, Surface, List } from 'react-native-paper';
+import { StyleSheet, RefreshControl, FlatList, View, Image } from 'react-native';
+import { useTheme, Surface, List, Avatar, Text } from 'react-native-paper';
 import color from 'color';
 import {useSelector, useDispatch} from 'react-redux';
 import {retrieveNews} from '../store/actions/news';
 import Loader from "../util/loader";
 import LoadingError from "../util/loadingError";
-import { DataPresent } from '../components/dataPresent';
+
+
+const AvatarImage = item => item.urlToImage ? <Avatar.Image style={styles.avatar} source={{ uri: item.urlToImage }} /> : <Avatar.Text style={styles.avatar} label="XD" />;
 
 export const Feed = ({ navigation }) => {
   const theme = useTheme();
@@ -25,25 +27,21 @@ export const Feed = ({ navigation }) => {
   }, [dispatch]);
 
   function renderItem({ item }) {
-    return <DataPresent {...item} />;
+    return (
+      <Surface style={styles.container}>
+        <List.Item
+          title={item.title}
+          description={item.source.name}
+          left={() => <AvatarImage {...item}/>}
+        />
+      </Surface>
+      
+    );
   }
   function keyExtractor(item) {
     return Math.random().toString();
   }
 
-  useEffect(() => {
-    if (JSON.stringify(dataSource.news).length>2){
-      setData(dataSource.news.articles.map(aux => ({
-        ...aux,
-        navigation,
-        onPress: () =>
-          navigation &&
-          navigation.push('Details', {
-            ...aux,
-          }),
-      })));
-    }
-  }, [dataSource]);
   
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -62,12 +60,12 @@ export const Feed = ({ navigation }) => {
     } else {
       if (dataSource.news !== null) {
         return (
-          <Surface style={styles.container}>
+          
             <FlatList
               ItemSeparatorComponent={renderSeparator}
               contentContainerStyle={{ backgroundColor: theme.colors.background }}
               style={{ backgroundColor: theme.colors.background }}
-              data={data}
+              data={dataSource.news.articles}
               renderItem={renderItem}
               keyExtractor={keyExtractor}
               refreshControl={
@@ -77,7 +75,6 @@ export const Feed = ({ navigation }) => {
                 />
               }
             />
-          </Surface>
         );
       }
     }
@@ -87,7 +84,7 @@ export const Feed = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding:5,
+    padding:10,
   },
   divider: {
     marginVertical:20,
@@ -106,5 +103,8 @@ const styles = StyleSheet.create({
   },
   stdMarginVertical: {
     marginVertical: 20,
-  }
+  },
+  avatar: {
+    marginRight: 10,
+  },
 });
