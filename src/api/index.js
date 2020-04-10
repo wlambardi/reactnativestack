@@ -12,7 +12,7 @@ export const getNews = () =>
     .request({
       url: 'https://newsapi.org/v2/top-headlines?country=ar&apiKey=d0cdeea4281146deb024ff3097f884c8',
       method: 'GET',
-      params: { pageSize: 32 },
+      params: { pageSize: 18 },
     })
     .then(response => {
       return response.data;

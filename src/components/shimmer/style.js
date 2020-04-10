@@ -13,5 +13,6 @@ export const main = StyleSheet.create({
     overflow: 'hidden',
     borderColor:'red',
     borderWidth: 0,
+    backgroundColor: '#F4F4F4'
   },
 });

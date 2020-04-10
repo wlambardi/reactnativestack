@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import { useTheme, Surface, Headline} from 'react-native-paper';
-import { AuthContext } from "../context/authContext";
 import color from 'color';
 import { AnimatedLoadImage } from '../components/animated-load-image/AnimatedLoadImage';
 
@@ -18,7 +17,7 @@ export const Message = (props) => {
 
       <View style={styles.stdMarginVertical}>
         <AnimatedLoadImage
-          source={{ uri: 'https://source.unsplash.com/1600x900/?nature,water' }}
+          source={{ uri: 'https://source.unsplash.com/1600x900/?technology' }}
           style={[
             styles.image,
             {

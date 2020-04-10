@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { w, h } from './Dimensions';
 import LottieView from 'lottie-react-native';
+import { Surface } from 'react-native-paper';
 
 const Loader = () => 
-    <View style={styles.container}>
+    <Surface style={styles.container}>
       <LottieView
         loop={true}
         autoPlay={true}
@@ -15,7 +16,7 @@ const Loader = () =>
         }}
         source={ require('../../assets/lotties/loader.json') }
       />
-    </View>
+    </Surface>
 
 const styles = StyleSheet.create({
   container: {

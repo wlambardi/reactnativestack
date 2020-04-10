@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, RefreshControl } from 'react-native';
 import { useTheme, Surface, Headline, List, Text } from 'react-native-paper';
 import color from 'color';
 import {useSelector, useDispatch} from 'react-redux';
@@ -25,8 +25,10 @@ export const Album = (props) => {
     dispatch(retrieveNews());
   }, [dispatch]);
 
+  const onRefresh = React.useCallback(() => {
+    dispatch(retrieveNews());
+  }, [dispatch]);
 
-  console.log('dataSource', JSON.stringify(dataSource));
   if (dataSource.error) {
     return <LoadingError />;
   }else{
@@ -39,11 +41,15 @@ export const Album = (props) => {
             
             { dataSource.news.articles &&
             <FlatGrid
-              itemDimension={w(25)}
+              itemDimension={w(20)}
               items={dataSource.news.articles}
               keyExtractor={item => item.urlToImage}
+              refreshControl={
+                <RefreshControl
+                  onRefresh={onRefresh}
+                />
+              }
               renderItem={({ item }) => (
-                
                 item.urlToImage && 
                 <AnimatedLoadImage
                   source={{ uri: item.urlToImage }}
@@ -77,7 +83,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 5,
     width: '100%',
-    height: w(25),
+    height: w(20),
   },
   surface: {
     width: 120,

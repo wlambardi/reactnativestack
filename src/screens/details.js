@@ -1,22 +1,12 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { useTheme, Surface, Text, Title } from 'react-native-paper';
+import { DetailedDataPresent } from '../components/detailedDataPresent';
+import { Profile } from './profile';
 
 
-export const Details = (props) => {
-  const theme = useTheme();
-  const { name } = props.route.params;
-  return (
-    <Surface style={styles.container}>
-    <Title style={{color:theme.colors.text}}>Detail Screen</Title>
-    <Text style={{color:theme.colors.text}}>Param Name {name}</Text>
-    </Surface>
-  );
+export const Details = props => {
+  if (props.route.params.name){
+    return <Profile/>;
+  }else{
+    return <DetailedDataPresent {...props.route.params} />;
+  }
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding:20,
-  },
-});
