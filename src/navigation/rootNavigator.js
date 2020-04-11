@@ -60,7 +60,7 @@ const AuthStackScreen = () => {
               ? options.title
               : scene.route.name;
 
-          /*return (
+          return (
             <Appbar.Header
               theme={{ colors: { primary: theme.colors.surface } }}
             >
@@ -79,14 +79,14 @@ const AuthStackScreen = () => {
                 }}
               />
             </Appbar.Header>
-          );*/
+          );
         },
       }}
     >
       <AuthStack.Screen
         name="SignIn"
         component={SignIn}
-        options={{ title: "My App" }}
+        options={{headerShown: false}}
       />
       <AuthStack.Screen
         name="CreateAccount"

@@ -14,9 +14,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    //justifyContent: "center",
+    justifyContent: "center",
     alignItems: "center",
-    paddingTop:100,
     backgroundColor:'transparent'
   },
   button: {
@@ -64,20 +63,20 @@ export const SignIn = ({ navigation }) => {
 
   return (
     video ? <VideoBackground/> :
-    <Animatable.View animation={fadeIn} duration={2000} style={styles.containerAnimatable}>
-      <ImageBackground  blurRadius={2} resizeMode={"cover"} source={imageBg} style={styles.container}>
-        <Headline style={styles.headline}>Ciudad de Buenos Aires</Headline>
-        <Caption>Caption</Caption>
+    <ScreenContainer>
+      <Animatable.View animation={fadeIn} duration={2000} style={styles.containerAnimatable}>
+        <ImageBackground  blurRadius={2} resizeMode={"cover"} source={imageBg} style={styles.container}>
 
-        <Button icon="login" color={paperTheme.colors.primary} style={styles.button} mode="contained" onPress={() => signIn()}>
-          Sign In
-        </Button>
-        
-        <Button icon="account-plus" color={paperTheme.colors.primary} style={styles.button} mode="contained" onPress={() => navigation.push("CreateAccount")}>
-          Create Account
-        </Button>
-      </ImageBackground>
-    </Animatable.View>
+          <Button icon="login" color={paperTheme.colors.primary} style={styles.button} mode="contained" onPress={() => signIn()}>
+            Sign In
+          </Button>
+          
+          <Button icon="account-plus" color={paperTheme.colors.primary} style={styles.button} mode="contained" onPress={() => navigation.push("CreateAccount")}>
+            Create Account
+          </Button>
+        </ImageBackground>
+      </Animatable.View>
+    </ScreenContainer>
   );
 };
 
